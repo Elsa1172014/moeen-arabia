@@ -1,156 +1,115 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>مُعين العربيّة - ثوب العيد</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f6fa;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      direction: rtl;
-    }
-    header {
-      padding: 10px 16px;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      font-size: 20px;
-    }
-    .info {
-      font-size: 12px;
-      color: #555;
-    }
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-    }
-    .slide-wrapper {
-      max-width: 1100px;
-      width: 100%;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .slide-wrapper img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
-    .controls {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-      font-size: 14px;
-    }
-    button {
-      border: none;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      cursor: pointer;
-      font-weight: 600;
-      background: #0984e3;
-      color: #fff;
-    }
-    button:disabled {
-      background: #b2bec3;
-      cursor: default;
-    }
-    .page-indicator {
-      font-weight: 600;
-    }
-    footer {
-      text-align: center;
-      padding: 8px;
-      font-size: 12px;
-      color: #636e72;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مُعين العربيّة – ثوب العيد</title>
+    <style>
+        body {
+            font-family: "Tahoma", sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header {
+            background-color: #2e3192;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .content {
+            margin-top: 40px;
+            font-size: 22px;
+            line-height: 2;
+        }
+
+        .btn-container {
+            margin-top: 50px;
+        }
+
+        .nav-btn {
+            font-size: 22px;
+            padding: 10px 25px;
+            margin: 10px;
+            background-color: #2e3192;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #1a1c61;
+        }
+
+        .page-indicator {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #444;
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <h1>مُعين العربيّة – ثوب العيد</h1>
-    <div class="info">تحضير تفاعلي – الصف الثامن</div>
-  </header>
 
-  <main>
-    <div class="slide-wrapper">
-      <img id="slideImage" src="" alt="شريحة الدرس" />
-    </div>
-    <div class="controls">
-      <button id="prevBtn">⬅ السابق</button>
-      <span class="page-indicator" id="pageIndicator"></span>
-      <button id="nextBtn">التالي ➡</button>
-    </div>
-  </main>
+<header>
+    مُعين العربيّة – نص شعري: ثوب العيد
+</header>
 
-  <footer>
-    © مُعين العربيّة – إعداد: السيد
-  </footer>
+<div class="content" id="pageContent">
+    مرحبًا بك! اضغط التالي للبدء 👇
+</div>
 
-  <script>
-    // 🔹 هنا تكتب أسماء الملفات بالضبط كما رفعتها
-    const slides = [
-      "slide1.png",
-      "slide2.png",
-      "slide3.png",
-      "slide4.png",
-      "slide5.png",
-      "slide6.png",
-      "slide7.png",
-      "slide8.png",
-      "slide9.png",
-      "slide10.png"
+<div class="btn-container">
+    <button class="nav-btn" onclick="prevPage()">⬅ السابق</button>
+    <button class="nav-btn" onclick="nextPage()">التالي ➡</button>
+</div>
+
+<div class="page-indicator" id="indicator">الصفحة 1 من 11</div>
+
+<script>
+    const pages = [
+        "🎯 أفعلها الآن<br><br>استخدم رمز الاستجابة للإجابة على الأسئلة!",
+        "📌 التهيئة: شاهد الصور ثم أجب عن السؤال 👇",
+        "📖 العنوان: نص شعري – ثوب العيد للكاتب محمد ذيب النعاني",
+        "🎓 هدف التعلم: تفسير كلمات النص وتحديد الدلالات الإيجابية",
+        "📚 معايير النجاح: قراءة + تحليل + استنتاج",
+        "📝 اقرأ الأبيات الشعرية التالية 👇",
+        "❓ أسئلة تحليل أولية بعد القراءة",
+        "ACP 🔍 تحقق إيجابي لمعيار النجاح الأول",
+        "🤝 العمل الجماعي – مجموعات تحليل النص",
+        "📊 تقييم ذاتي لمعيار النجاح الثاني",
+        "🎟 تذكرة الخروج – ماذا تعلّمت اليوم؟"
     ];
 
     let current = 0;
-    const imgEl = document.getElementById("slideImage");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const indicator = document.getElementById("pageIndicator");
 
-    function updateSlide() {
-      imgEl.src = slides[current];
-      indicator.textContent = `الصفحة ${current + 1} من ${slides.length}`;
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === slides.length - 1;
+    function updatePage() {
+        document.getElementById("pageContent").innerHTML = pages[current];
+        document.getElementById("indicator").innerHTML = `الصفحة ${current + 1} من ${pages.length}`;
     }
 
-    prevBtn.addEventListener("click", () => {
-      if (current > 0) {
-        current--;
-        updateSlide();
-      }
-    });
+    function nextPage() {
+        if (current < pages.length - 1) {
+            current++;
+            updatePage();
+        }
+    }
 
-    nextBtn.addEventListener("click", () => {
-      if (current < slides.length - 1) {
-        current++;
-        updateSlide();
-      }
-    });
+    function prevPage() {
+        if (current > 0) {
+            current--;
+            updatePage();
+        }
+    }
 
-    // أول عرض
-    updateSlide();
-  </script>
+    updatePage();
+</script>
+
 </body>
 </html>
