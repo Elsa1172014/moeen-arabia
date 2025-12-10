@@ -1,115 +1,184 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مُعين العربيّة – ثوب العيد</title>
-    <style>
-        body {
-            font-family: "Tahoma", sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مُعين العربيّة – تحضير ثوب العيد</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header {
-            background-color: #2e3192;
-            color: white;
-            padding: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            border-radius: 10px;
-        }
+    body {
+      font-family: "Tahoma", system-ui, sans-serif;
+      background: #f5f6fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .content {
-            margin-top: 40px;
-            font-size: 22px;
-            line-height: 2;
-        }
+    header {
+      background: #ffffff;
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .btn-container {
-            margin-top: 50px;
-        }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222f3e;
+    }
 
-        .nav-btn {
-            font-size: 22px;
-            padding: 10px 25px;
-            margin: 10px;
-            background-color: #2e3192;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+    header .sub {
+      font-size: 13px;
+      color: #636e72;
+    }
 
-        .nav-btn:hover {
-            background-color: #1a1c61;
-        }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
 
-        .page-indicator {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #444;
-        }
-    </style>
+    .slide-card {
+      width: 100%;
+      max-width: 1200px;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .controls {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .nav-btn {
+      border: none;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #0984e3;
+      color: #ffffff;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .nav-btn:disabled {
+      background: #b2bec3;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .nav-btn:not(:disabled):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(9,132,227,0.4);
+    }
+
+    .indicator {
+      font-weight: 600;
+      color: #2d3436;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      color: #636e72;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    مُعين العربيّة – نص شعري: ثوب العيد
-</header>
+  <header>
+    <div>
+      <h1>مُعين العربيّة – ثوب العيد</h1>
+      <div class="sub">تحضير تفاعلي – عرض الشرائح للدرس كاملًا</div>
+    </div>
+    <div class="sub">إعداد: السيد</div>
+  </header>
 
-<div class="content" id="pageContent">
-    مرحبًا بك! اضغط التالي للبدء 👇
-</div>
+  <main>
+    <div class="slide-card">
+      <img id="slideImage" src="" alt="شريحة الدرس">
+    </div>
 
-<div class="btn-container">
-    <button class="nav-btn" onclick="prevPage()">⬅ السابق</button>
-    <button class="nav-btn" onclick="nextPage()">التالي ➡</button>
-</div>
+    <div class="controls">
+      <button class="nav-btn" id="prevBtn">⬅ السابق</button>
+      <span class="indicator" id="indicator">الصفحة 1 من 10</span>
+      <button class="nav-btn" id="nextBtn">التالي ➡</button>
+    </div>
+  </main>
 
-<div class="page-indicator" id="indicator">الصفحة 1 من 11</div>
+  <footer>
+    © مُعين العربيّة – جميع الحقوق محفوظة
+  </footer>
 
-<script>
-    const pages = [
-        "🎯 أفعلها الآن<br><br>استخدم رمز الاستجابة للإجابة على الأسئلة!",
-        "📌 التهيئة: شاهد الصور ثم أجب عن السؤال 👇",
-        "📖 العنوان: نص شعري – ثوب العيد للكاتب محمد ذيب النعاني",
-        "🎓 هدف التعلم: تفسير كلمات النص وتحديد الدلالات الإيجابية",
-        "📚 معايير النجاح: قراءة + تحليل + استنتاج",
-        "📝 اقرأ الأبيات الشعرية التالية 👇",
-        "❓ أسئلة تحليل أولية بعد القراءة",
-        "ACP 🔍 تحقق إيجابي لمعيار النجاح الأول",
-        "🤝 العمل الجماعي – مجموعات تحليل النص",
-        "📊 تقييم ذاتي لمعيار النجاح الثاني",
-        "🎟 تذكرة الخروج – ماذا تعلّمت اليوم؟"
+  <script>
+    // ✅ تأكد أن أسماء الملفات تطابق الصور التي رفعتها في GitHub
+    const slides = [
+      "1.png",
+      "2.png",
+      "3.png",
+      "4.png",
+      "5.png",
+      "6.png",
+      "7.png",
+      "8.png",
+      "9.png",
+      "10.png"
     ];
 
     let current = 0;
+    const imgEl = document.getElementById("slideImage");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const indicator = document.getElementById("indicator");
 
-    function updatePage() {
-        document.getElementById("pageContent").innerHTML = pages[current];
-        document.getElementById("indicator").innerHTML = `الصفحة ${current + 1} من ${pages.length}`;
+    function updateSlide() {
+      imgEl.src = slides[current];
+      indicator.textContent = `الصفحة ${current + 1} من ${slides.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
     }
 
-    function nextPage() {
-        if (current < pages.length - 1) {
-            current++;
-            updatePage();
-        }
-    }
+    prevBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        updateSlide();
+      }
+    });
 
-    function prevPage() {
-        if (current > 0) {
-            current--;
-            updatePage();
-        }
-    }
+    nextBtn.addEventListener("click", () => {
+      if (current < slides.length - 1) {
+        current++;
+        updateSlide();
+      }
+    });
 
-    updatePage();
-</script>
+    // أول تحميل
+    updateSlide();
+  </script>
 
 </body>
 </html>
