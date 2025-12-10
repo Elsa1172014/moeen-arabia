@@ -1,10 +1,156 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>مُعين العربيّة</title>
+  <meta charset="UTF-8" />
+  <title>مُعين العربيّة - ثوب العيد</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      direction: rtl;
+    }
+    header {
+      padding: 10px 16px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 20px;
+    }
+    .info {
+      font-size: 12px;
+      color: #555;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .slide-wrapper {
+      max-width: 1100px;
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide-wrapper img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    .controls {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 14px;
+    }
+    button {
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+      background: #0984e3;
+      color: #fff;
+    }
+    button:disabled {
+      background: #b2bec3;
+      cursor: default;
+    }
+    .page-indicator {
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      padding: 8px;
+      font-size: 12px;
+      color: #636e72;
+    }
+  </style>
 </head>
 <body>
-  <h1>مرحبًا بكم في مُعين العربيّة</h1>
-  <p>هذا هو الإصدار التجريبي الأول من المنصّة.</p>
+  <header>
+    <h1>مُعين العربيّة – ثوب العيد</h1>
+    <div class="info">تحضير تفاعلي – الصف الثامن</div>
+  </header>
+
+  <main>
+    <div class="slide-wrapper">
+      <img id="slideImage" src="" alt="شريحة الدرس" />
+    </div>
+    <div class="controls">
+      <button id="prevBtn">⬅ السابق</button>
+      <span class="page-indicator" id="pageIndicator"></span>
+      <button id="nextBtn">التالي ➡</button>
+    </div>
+  </main>
+
+  <footer>
+    © مُعين العربيّة – إعداد: السيد
+  </footer>
+
+  <script>
+    // 🔹 هنا تكتب أسماء الملفات بالضبط كما رفعتها
+    const slides = [
+      "slide1.png",
+      "slide2.png",
+      "slide3.png",
+      "slide4.png",
+      "slide5.png",
+      "slide6.png",
+      "slide7.png",
+      "slide8.png",
+      "slide9.png",
+      "slide10.png"
+    ];
+
+    let current = 0;
+    const imgEl = document.getElementById("slideImage");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const indicator = document.getElementById("pageIndicator");
+
+    function updateSlide() {
+      imgEl.src = slides[current];
+      indicator.textContent = `الصفحة ${current + 1} من ${slides.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        updateSlide();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (current < slides.length - 1) {
+        current++;
+        updateSlide();
+      }
+    });
+
+    // أول عرض
+    updateSlide();
+  </script>
 </body>
 </html>
